@@ -1,0 +1,9 @@
+<h1>Information on {{ vm.stock.Name }}</h1>
+
+<p><small>{{ vm.stock.Symbol }}</small> </p>
+
+<p>Current Price: {{ vm.stock.LastSale }}</p>
+<p>Market Cap: {{ vm.stock.MarketCap }}</p>
+<p ng-hide = "!vm.stock.IPOYear">IPO Year: {{ vm.stock.IPOYear }}</p>
+<p ng-hide = "!vm.stock.Industry">Industry: {{ vm.stock.Industry }}</p>
+<p><a href = "{{ vm.stock.SummaryQuote }}">More Information</a></p>
