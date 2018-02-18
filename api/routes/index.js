@@ -11,5 +11,9 @@ router
 router
     .route('/stocks/:stockId')
     .get(ctrlStocks.stocksGetOne)
+    
+router
+    .route('/stocks/symbol/:symbol')
+    .get(ctrlStocks.stocksFind)
 
 module.exports = router;

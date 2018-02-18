@@ -27,6 +27,15 @@ function config ($routeProvider){
             restricted: false
         }
     })
+    
+    .when('/stocks/symbol/:Symbol', { 
+        templateUrl: 'angular-app/stock-display/stock.html',
+        controller: StockController,
+        controllerAs: 'vm',
+        access:{
+            restricted: false
+        }
+    })
 
     .otherwise({
         redirectTo: '/'
