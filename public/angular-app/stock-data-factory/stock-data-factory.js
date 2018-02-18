@@ -15,7 +15,7 @@ function stockDataFactory($http){
     // }
     
         function stockDisplay(Symbol){
-        return $http.get('/api/stocks/symbol/' + Symbol).then(complete).catch(failed);
+        return $http.get('/api/stocks/' + Symbol).then(complete).catch(failed);
     }
     
     function complete(response){

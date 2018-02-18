@@ -12,9 +12,9 @@ var stockSchema = new mongoose.Schema({
     SummaryQuote: String
 });
 
-stockSchema.query.bySymbol = function(Symbol) {
-    return this.find({ Symbol: Symbol });
-  };
+// stockSchema.query.bySymbol = function(Symbol) {
+//     return this.find({ Symbol: Symbol });
+//   };
 
 //   var Stock = mongoose.model('Stock', stockSchema);
 //   Stock.find().bySymbol(Symbol).exec(function(err, stocks) {

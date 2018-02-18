@@ -7,6 +7,4 @@ function StockController($route, $routeParams, $window, stockDataFactory){
     stockDataFactory.stockDisplay(Symbol).then(function(response){
         vm.stock = response.data;
     });
-
-        
     };

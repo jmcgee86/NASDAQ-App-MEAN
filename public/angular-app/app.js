@@ -19,16 +19,16 @@ function config ($routeProvider){
             restricted: false
         }
     })
-    .when ('/stock/:id', {
-        templateUrl: 'angular-app/stock-display/stock.html',
-        controller: StockController,
-        controllerAs: 'vm',
-        access:{
-            restricted: false
-        }
-    })
+    // .when ('/stock/:id', {
+    //     templateUrl: 'angular-app/stock-display/stock.html',
+    //     controller: StockController,
+    //     controllerAs: 'vm',
+    //     access:{
+    //         restricted: false
+    //     }
+    // })
     
-    .when('/stocks/symbol/:Symbol', { 
+    .when('/stocks/:Symbol', { 
         templateUrl: 'angular-app/stock-display/stock.html',
         controller: StockController,
         controllerAs: 'vm',

@@ -35,8 +35,9 @@ module.exports.stocksGetAll = function (req, res){
 
     Stock
         .find()
-        .skip(offset)
+        .skip("!LastSale")
         .limit(count)
+        .sort("-LastSale")
         .exec(function(err, stocks){
             if (err){
                 console.log("Error finding stocks");
@@ -52,34 +53,34 @@ module.exports.stocksGetAll = function (req, res){
 
 };
 
-module.exports.stocksGetOne = function (req, res, stocks){
-    var stockId = req.params.stockId;
-    var symbol = stocks.Symbol;
-    console.log("GET stockId", stockId);
+// module.exports.stocksGetOne = function (req, res, stocks){
+//     var stockId = req.params.stockId;
+//     var symbol = stocks.Symbol;
+//     console.log("GET stockId", stockId);
     
-    Stock
-    .findById(stockId)
-    .exec(function(err, doc){
-        var response = {
-            status: 200,
-            message: doc
-        };
-        if (err){
-                console.log("Error finding stock");
-                response.status=500;
-                response.message = err;
-            }else if(!doc){
-                response.status=404;
-                response.message={
-                        "message": "Stock ID not found"
-                    };
-            }
-            res
-                .status(response.status)
-                .json(response.message);
-        });
+//     Stock
+//     .findById(stockId)
+//     .exec(function(err, doc){
+//         var response = {
+//             status: 200,
+//             message: doc
+//         };
+//         if (err){
+//                 console.log("Error finding stock");
+//                 response.status=500;
+//                 response.message = err;
+//             }else if(!doc){
+//                 response.status=404;
+//                 response.message={
+//                         "message": "Stock ID not found"
+//                     };
+//             }
+//             res
+//                 .status(response.status)
+//                 .json(response.message);
+//         });
     
-};
+// };
 
 module.exports.stocksFind = function (req,res){
     var stockSymbol = req.params.symbol;
@@ -105,8 +106,6 @@ module.exports.stocksFind = function (req,res){
             res
                 .status(response.status)
                 .json(response.message);
-                //.sendFile(path.join(__dirname, '/stocks/symbol/', stock.Symbol));
-    
   });
 }
 

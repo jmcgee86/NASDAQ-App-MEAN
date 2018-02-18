@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MEAN Nasdaq</title>
+    <link href = "css/bootstrap.min.css" rel = "stylesheet">
+    <link rel="stylesheet" href="/css/custom.css">
 </head>
 <body>
+
+<mn-navigation></mn-navigation>
+
 <div class = "container">
     <div ng-view></div>
 </div>
@@ -18,5 +23,6 @@
     <script src= "angular-app/stock-list/stock-list-controller.js"></script>
     <script src= "angular-app/stock-display/stock-display-controller.js"></script>
     <script src= "angular-app/stock-data-factory/stock-data-factory.js"></script>
+    <script src= "angular-app/navigation-directive/navigation-directive.js"></script>
 </body>
 </html>
