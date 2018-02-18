@@ -1,1 +1,9 @@
-<h1>Main Page</h1>
+<h1>NASDAQ - MEAN App</h1>
+
+<form ng-hide="vm.message" name="register" ng-submit="vm.search()">
+  <div class="form-group">
+    <label for="symbol">Symbol</label>
+    <input type="symbol" class="form-control" id="symbol" placeholder="Symbol" ng-model="vm.symbol" autocapitalize="none">
+  </div>
+  <button type="submit" class="btn btn-success">Search</button>
+</form>

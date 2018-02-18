@@ -3,7 +3,7 @@ var Stock = mongoose.model('Stock');
 
 
 module.exports.stocksGetAll = function (req, res){
-    var offset = 0;
+    var offset = 6;
     var count = 10;
     var maxCount = 50;
   
@@ -36,6 +36,7 @@ module.exports.stocksGetAll = function (req, res){
     Stock
         .find()
         .skip("!LastSale")
+        .skip(offset)
         .limit(count)
         .sort("-LastSale")
         .exec(function(err, stocks){
