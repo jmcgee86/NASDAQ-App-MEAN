@@ -1,20 +1,24 @@
 angular.module('meannasdaq').controller('SearchController', SearchController);
 
-function SearchController (stockDataFactory){
+function SearchController ($http, $route, $routeParams, $window, stockDataFactory){
     var vm = this;
-    var Symbol = vm.Symbol;
     vm.search = function(){
+        var Symbol = vm.symbol;
         console.log("searching for " + Symbol);
-        stockDataFactory.stockDisplay(Symbol).then(function(response){
-        vm.stocks = response.data;
-        console.log(response.data)
-        })
+        
+         $http.get('/api/stocks/', Symbol).then(function(result){
+        console.log(result);
+                    vm.stock = result.data;
+                    vm.error = '';
+                }).catch(function(error){
+                    console.log(error);
+                });
+        
+        
+        // stockDataFactory.stockDisplay(Symbol).then(function(response){
+        // vm.stock = response.data;
+        // console.log(response.data)
+        // })
+    
     }
     };
-        
-        // $http.get('/stocks/', symbol).then(function(result){
-        //         vm.error = '';
-        //         }).catch(function(error){
-        //             console.log(error);
-        //         });
-        //     }

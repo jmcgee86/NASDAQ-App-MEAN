@@ -1,9 +1,19 @@
 <h1>NASDAQ - MEAN App</h1>
 
-<form ng-hide="vm.message" name="register" ng-submit="vm.search()">
-  <div class="form-group">
-    <label for="symbol">Symbol</label>
-    <input type="symbol" class="form-control" id="symbol" placeholder="Symbol" ng-model="vm.symbol" autocapitalize="none">
-  </div>
-  <button type="submit" class="btn btn-success">Search</button>
+
+<form name="searchForm" ng-submit = "vm.search()">
+  <input name="symbol" type="text"class="form-control" id="symbol" default="search by stock symbol" ng-model="vm.Symbol" ng-minlength="2" required>
+  <input type = "submit">
 </form>
+
+<div ng-if="searchForm.$valid"><h3>Information on {{ vm.stock.Name }}</h3>
+
+    <p><small>{{ vm.stock.Symbol }}</small> </p>
+    
+    <p>Current Price: {{ vm.stock.LastSale | currency}}</p>
+    <p>Market Cap: {{ vm.stock.MarketCap | number: fractionSize }}</p>
+    <p ng-hide = "!vm.stock.IPOYear">IPO Year: {{ vm.stock.IPOYear }}</p>
+    <p ng-hide = "!vm.stock.Industry">Industry: {{ vm.stock.Industry }}</p>
+    <p><a href = "{{ vm.stock.SummaryQuote }}" target="_blank">More Information</a></p>
+
+</div>
