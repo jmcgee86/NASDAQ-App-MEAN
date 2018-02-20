@@ -1,8 +1,8 @@
 <h1>NASDAQ - MEAN App</h1>
 
-
-<form name="searchForm" ng-submit = "vm.search()">
-  <input name="symbol" type="text"class="form-control" id="symbol" default="search by stock symbol" ng-model="vm.Symbol" ng-minlength="2" required>
+<div ng-controller = "SearchController">
+<form name="searchForm" ng-submit = "search()">
+  <input name="symbol" type="text" id="symbol" default="search by stock symbol" ng-model="vm.symbol" ng-minlength="2" required> 
   <input type = "submit">
 </form>
 
@@ -15,5 +15,7 @@
     <p ng-hide = "!vm.stock.IPOYear">IPO Year: {{ vm.stock.IPOYear }}</p>
     <p ng-hide = "!vm.stock.Industry">Industry: {{ vm.stock.Industry }}</p>
     <p><a href = "{{ vm.stock.SummaryQuote }}" target="_blank">More Information</a></p>
+
+</div>
 
 </div>
