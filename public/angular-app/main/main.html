@@ -6,7 +6,11 @@
   <button type = "submit" class="btn btn-success">Search</button>
 </form>
 
-<!--<div ng-if="searchForm.submit" ng-model= "vm.stock">-->
+<div ng-hide="vm.isSubmitted" ng-if="vm.error" class="alert alert-danger" role="alert">
+  {{ vm.error }}
+</div>
+
+<div ng-if="vm.isSubmitted">
 
     <h3>Information on {{ vm.stock.Name }}</h3>
 
@@ -14,8 +18,8 @@
     
     <p>Current Price: {{ vm.stock.LastSale | currency}}</p>
     <p>Market Cap: {{ vm.stock.MarketCap | number: fractionSize }}</p>
-    <p ng-hide = "!vm.stock.IPOYear">IPO Year: {{ vm.stock.IPOYear }}</p>
+    <p ng-hide = "!vm.stock.IPOyear">IPO Year: {{ vm.stock.IPOyear }}</p>
     <p ng-hide = "!vm.stock.Industry">Industry: {{ vm.stock.Industry }}</p>
     <p><a href = "{{ vm.stock.SummaryQuote }}" target="_blank">More Information</a></p>
 
-<!--</div>-->
+</div>
