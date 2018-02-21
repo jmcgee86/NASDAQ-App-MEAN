@@ -11,7 +11,7 @@ function config ($httpProvider, $routeProvider){
     .when ('/', {
         templateUrl: 'angular-app/main/main.html',
         controller: SearchController,
-        controlelrAs: 'vm',
+        controllerAs: 'vm',
         access:{
             restricted: false
         }

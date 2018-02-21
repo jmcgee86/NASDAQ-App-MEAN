@@ -1,12 +1,14 @@
 <h1>NASDAQ - MEAN App</h1>
 
-<div ng-controller = "SearchController">
-<form name="searchForm" ng-submit = "search()">
-  <input name="symbol" type="text" id="symbol" default="search by stock symbol" ng-model="vm.symbol" ng-minlength="2" required> 
-  <input type = "submit">
+
+<form name="search" ng-submit = "vm.search()">
+  <input name="symbol" type="text" id="symbol" placeholder="search by stock symbol" ng-model="vm.symbol" ng-minlength="2" required> 
+  <button type = "submit" class="btn btn-success">Search</button>
 </form>
 
-<div ng-if="searchForm.$valid"><h3>Information on {{ vm.stock.Name }}</h3>
+<!--<div ng-if="searchForm.submit" ng-model= "vm.stock">-->
+
+    <h3>Information on {{ vm.stock.Name }}</h3>
 
     <p><small>{{ vm.stock.Symbol }}</small> </p>
     
@@ -16,6 +18,4 @@
     <p ng-hide = "!vm.stock.Industry">Industry: {{ vm.stock.Industry }}</p>
     <p><a href = "{{ vm.stock.SummaryQuote }}" target="_blank">More Information</a></p>
 
-</div>
-
-</div>
+<!--</div>-->
