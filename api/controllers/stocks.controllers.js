@@ -85,7 +85,7 @@ module.exports.stocksGetAll = function (req, res){
 
 module.exports.stocksFind = function (req,res){
     var stockSymbol = req.params.symbol;
-   // console.log("Stock symbol is: " + stocks.Symbol);
+   console.log("Stock symbol is: " + stockSymbol);
     Stock
     .findOne({ Symbol: stockSymbol })
     .exec(function(err, stock) {
@@ -110,3 +110,45 @@ module.exports.stocksFind = function (req,res){
   });
 }
 
+module.exports.stocksUpdateOne = function (req, res){
+    var stockSymbol = req.params.symbol;
+    console.log("GET stockSymbol", stockSymbol);
+    
+    Stock
+        .findOne({ Symbol: stockSymbol })
+        .exec(function(err, doc){
+            var response = {
+                status: 200,
+                message: doc
+            };
+            if (err){
+                    console.log("Error finding stock");
+                    response.status=500;
+                    response.message = err;
+                }else if(!doc){
+                    response.status=404;
+                    response.message={
+                            "message": "Stock not found"
+                        };
+                }
+                if(response.status != 200){
+                    res
+                        .status(response.status)
+                        .json(response.message);
+                }
+                    
+                doc.save(function(err, stockUpdated){
+                    if(err){
+                        res
+                            .status(500)
+                            .json(err);
+                    }else{
+                        res
+                            .status(204)
+                            .json();
+                    }
+                });
+                    
+                
+            });
+};

@@ -1,5 +1,12 @@
 var mongoose = require('mongoose');
 
+var querySchema = new mongoose.Schema({
+    createdOn: {
+        type: Date,
+        "default": Date.now
+    }
+});
+
 var stockSchema = new mongoose.Schema({
     Symbol: String,
     Name: String,
@@ -9,17 +16,9 @@ var stockSchema = new mongoose.Schema({
     IPOYear: Number,
     Sector: String,
     Industry: String,
-    SummaryQuote: String
+    SummaryQuote: String,
+    Queries: [querySchema]
 });
-
-// stockSchema.query.bySymbol = function(Symbol) {
-//     return this.find({ Symbol: Symbol });
-//   };
-
-//   var Stock = mongoose.model('Stock', stockSchema);
-//   Stock.find().bySymbol(Symbol).exec(function(err, stocks) {
-//     console.log(stocks);
-//   });
 
 mongoose.model('Stock', stockSchema, 'stocks');
 // (Modelname, schemaName, collection);

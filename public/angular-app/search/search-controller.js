@@ -8,10 +8,15 @@
             stockDataFactory.stockDisplay(symbol).then(function(response) {
             console.log(response);
             if(!response){
-                vm.error = "Cannot find stock"
+                vm.error = "Cannot find stock";
             }else{
             vm.stock = response.data;
-            vm.isSubmitted =true;
+            var postData = "";
+            stockDataFactory.postQuery(symbol, postData).then(function(response){
+            }).catch(function(error){
+                console.log(error);
+            });
+            vm.isSubmitted = true;
             }
             });
         }

@@ -3,16 +3,13 @@ var router = express.Router();
 
 
 var ctrlStocks = require('../controllers/stocks.controllers.js');
-var ctrlUsers = require('..//controllers/users.controllers.js');
+var ctrlUsers = require('../controllers/users.controllers.js');
+var ctrlQueries = require('..//controllers/queries.controllers.js');
 
 
 router
     .route('/stocks')
     .get(ctrlStocks.stocksGetAll)
-
-// router
-//     .route('/stocks/:stockId')
-//     .get(ctrlStocks.stocksGetOne)
     
 router
     .route('/stocks/:symbol')
@@ -26,5 +23,10 @@ router
 router
     .route('/users/login')
     .post(ctrlUsers.login);
+    
+router
+    .route('/stocks/:symbol/queries')
+    //.get(ctrlQueries.queriesGetAll)
+    .post(ctrlQueries.queriesAddOne);
 
 module.exports = router;
