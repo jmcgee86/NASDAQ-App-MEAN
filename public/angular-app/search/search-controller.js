@@ -20,4 +20,20 @@
             }
             });
         }
+        
+        vm.showQueries = function(){
+            vm.showQueriesSubmitted = false;
+            stockDataFactory.displayQueries().then(function(response){
+                if (!response){
+                    vm.error = "Cannot find queries";
+                    vm.showQueriesSubmitted = true;
+                   } else{
+                        vm.stocks = response.data
+                        console.log(vm.stocks);
+                    }
+            }).catch(function(error){
+                console.log(error);
+            });
+            vm.showQueriesSubmitted = true;
+        }
     }

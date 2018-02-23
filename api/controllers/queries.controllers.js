@@ -45,3 +45,25 @@ module.exports.queriesAddOne = function (req,res){
         }
     });
 };
+
+module.exports.queriesGetAll = function (req, res){
+    var Queries = req.params.queries;
+    Stock
+        .find()
+        .exists('Queries')
+        //.skip("!Queries")
+        //.sort("-Queries.createdOn")
+        .exec(function(err, stocks){
+            if (err){
+                console.log("Error finding stocks");
+                res
+                    .status(500)
+                    .json(err);
+            }else{
+            console.log("Found stocks", stocks.length);
+            res
+                .json(stocks);
+            }
+    });
+
+};

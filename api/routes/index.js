@@ -28,5 +28,9 @@ router
     .route('/stocks/:symbol/queries')
     //.get(ctrlQueries.queriesGetAll)
     .post(ctrlQueries.queriesAddOne);
+    
+router
+    .route('/queries')
+    .get(ctrlQueries.queriesGetAll);
 
 module.exports = router;
