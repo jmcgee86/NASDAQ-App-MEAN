@@ -23,3 +23,12 @@
     <p><a href = "{{ vm.stock.SummaryQuote }}" target="_blank">More Information</a></p>
 
 </div>
+
+ <button type = "submit" class = "btn btn-success" ng-click = "vm.showQueries()">Show Recent Searches</button>
+ 
+ <div ng-if = "vm.showQueriesSubmitted">
+
+<p> test button click</p>   
+      <li ng-repeat="stock in vm.stocks | orderBy: '-Queries[0].createdOn'"><a ng-href="#!/stocks/{{ stock.Symbol }}">{{stock.Symbol}} Search Date: {{stock.Queries[0].createdOn | date}}</a></li>
+ 
+ </div>
