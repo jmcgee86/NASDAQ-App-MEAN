@@ -150,3 +150,29 @@ module.exports.stocksUpdateOne = function (req, res){
                 
             });
 };
+
+
+
+module.exports.stocksGetTrending = function (req, res){
+    console.log("req params are:"+ req.params);
+    console.log("req body is: " +req.body);
+    var sorter = req.params.selection
+    var count =10;
+    Stock
+        .find()
+        //.exists(, true)
+        .limit(count)
+        .sort("-"+sorter)
+        .exec(function(err, stocks){
+            if (err){
+                console.log("Error finding stocks");
+                res
+                    .status(500)
+                    .json(err);
+            }else{
+            console.log("Found stocks", stocks.length);
+            res
+                .json(stocks);
+            }
+    });
+}

@@ -15,7 +15,10 @@ router
     .route('/stocks/:symbol')
     .get(ctrlStocks.stocksFind)
     
-
+router
+    .route('/trending/:selection')
+    .get(ctrlStocks.stocksGetTrending)
+    
 router
     .route('/users/register')
     .post(ctrlUsers.register);

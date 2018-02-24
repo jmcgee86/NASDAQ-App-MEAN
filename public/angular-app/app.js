@@ -25,6 +25,15 @@ function config ($httpProvider, $routeProvider){
         }
     })
     
+    .when('/trending',{
+        templateUrl: 'angular-app/stocks-trending/trending.html',
+        controller: TrendingStocksController,
+        controllerAs: 'vm',
+        access:{
+            restricted: false
+        }
+    })
+    
     .when('/stocks/:Symbol', { 
         templateUrl: 'angular-app/stock-display/stock.html',
         controller: StockController,

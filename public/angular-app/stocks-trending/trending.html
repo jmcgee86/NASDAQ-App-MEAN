@@ -1,0 +1,13 @@
+<h1> {{ vm.title }}</h1>
+<ul>
+
+
+<button type = "submit" class = "btn btn-success" ng-click = "vm.trending('LastSale')">Show Trending Stocks by Sale Price</button>
+<br>
+<br>
+<button type = "submit" class = "btn btn-success" ng-click = "vm.trending('MarketCap')">Show Trending Stocks by Market Cap</button>
+
+    
+    <li ng-repeat="stock in vm.stocks"><a ng-href="#!/stocks/{{ stock.Symbol }}">{{stock.Name}}</a></li>
+    
+</ul>
