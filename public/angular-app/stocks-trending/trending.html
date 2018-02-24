@@ -4,13 +4,18 @@
 
 <button type = "submit" class = "btn btn-success" ng-click = "vm.trending('LastSale') ; vm.salePrice()">Show Trending Stocks by Sale Price</button>
 <button type = "submit" class = "btn btn-success" ng-click = "vm.trending('MarketCap') ; vm.marketCap()">Show Trending Stocks by Market Cap</button>
+<button type = "submit" class = "btn btn-success" ng-click = "vm.trending('Queries') ; vm.query()">Show Trending Stocks by Most Searched</button>
+
+
 
 <h3 ng-if="vm.marketSubmitted">Top Stocks by Market Cap</h3>
 <h3 ng-if="vm.saleSubmitted">Top Stocks by Sale Price</h3>
+<h3 ng-if="vm.querySubmitted">Top Stocks by Most Searched</h3>
 <div ng-repeat="stock in vm.stocks">
     <a ng-href="#!/stocks/{{ stock.Symbol }}">{{stock.Name }}</a>
     <p ng-if = "vm.marketSubmitted" >Market Cap: {{stock.MarketCap | number: fractionSize}}</p>
     <p ng-if = "vm.saleSubmitted">Sale Price: {{stock.LastSale | currency}}</p>
+    <p ng-if = "vm.querySubmitted">Search Count: {{stock.Queries.length}} | Last Searched: {{stock.Queries[stock.Queries.length -1].createdOn | date}}</p>
 </div>
     
 </ul>

@@ -27,6 +27,7 @@ function TrendingStocksController(stockDataFactory){
     vm.title = 'Trending Stocks';
     vm.saleSubmitted = false;
     vm.marketSubmitted=false;
+    vm.querySubmitted = false
 
     vm.trending = function(selection){
     stockDataFactory.stockTrending(selection).then(function(response){
@@ -37,14 +38,22 @@ function TrendingStocksController(stockDataFactory){
 
     vm.salePrice = function(){
         vm.marketSubmitted=false;
+        vm.querySubmitted = false;
         vm.saleSubmitted = true;
         
     }
     
     vm.marketCap = function(){
         vm.saleSubmitted = false;
+        vm.querySubmitted = false
         vm.marketSubmitted=true;
 
+    }
+    
+    vm.query = function(){
+        vm.saleSubmitted = false;
+        vm.querySubmitted = true;
+        vm.marketSubmitted=false;
     }
 
 }
