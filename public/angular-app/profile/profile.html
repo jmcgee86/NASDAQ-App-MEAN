@@ -2,4 +2,6 @@
 
 <h3>Your recent searches:</h3>
 
-    <li ng-repeat="searches in vm.loggedUser[0].searches">{{searches.createdOn | date}}</li>
+    <!--<li ng-repeat="searches in vm.loggedUser[0].searches">{{searches.symbol}} Searched on: {{searches.createdOn | date}}</li>-->
+    
+<li ng-repeat="searches in vm.loggedUser[0].searches"><a ng-href="#!/stocks/{{ searches.symbol }}">{{searches.symbol}} Searched on: {{searches.createdOn | date}}</a></li>

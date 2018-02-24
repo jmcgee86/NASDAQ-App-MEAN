@@ -14,6 +14,11 @@
         vm.search = function(){
             vm.isSubmitted = false;
             var symbol = vm.symbol.toUpperCase();
+            
+            var postUserQuery ={
+              symbol: vm.symbol.toUpperCase() 
+            }
+            
             stockDataFactory.stockDisplay(symbol).then(function(response) {
             console.log(response);
             if(!response){
@@ -32,8 +37,7 @@
                 var token = $window.sessionStorage.token;
                 var decodedToken = jwtHelper.decodeToken(token);
                 var User = decodedToken.username;
-                var userQuery = '';
-                stockDataFactory.postUserQuery(User, userQuery).then(function(response){
+                stockDataFactory.postUserQuery(User, postUserQuery).then(function(response){
                 }).catch(function(error){
                 console.log(error)
             }

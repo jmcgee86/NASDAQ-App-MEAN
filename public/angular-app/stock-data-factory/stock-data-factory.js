@@ -26,8 +26,8 @@ function stockDataFactory($http){
         return $http.get('api/queries').then(complete).catch(failed);
     }
     
-    function postUserQuery(User, Query){
-        return $http.post('api/users/' + User + '/searches', Query).then(complete).catch(failed);
+    function postUserQuery(User, userQuery){
+        return $http.post('api/users/' + User + '/searches', userQuery).then(complete).catch(failed);
     }
     
     function getUser(User){

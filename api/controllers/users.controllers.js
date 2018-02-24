@@ -106,6 +106,7 @@ module.exports.retrieve = function(req,res){
 var _addUserQuery = function(req,res, user){
    
     user.searches.push({
+        symbol: req.body.symbol
     });
     
     user.save(function(err, userUpdated){

@@ -6,17 +6,7 @@ var searchesSchema = new mongoose.Schema({
         type: Date,
         "default": Date.now
     },
-    stock:{ 
-    Symbol: String,
-    Name: String,
-    //LastSale: Number,
-    //MarketCap: Number,
-    //ADRTSO: String,
-    //IPOYear: Number,
-    //Sector: String,
-    //Industry: String,
-    SummaryQuote: String,
-    } 
+    symbol: String
 });
 
 var userSchema = new mongoose.Schema({
