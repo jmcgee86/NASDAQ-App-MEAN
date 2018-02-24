@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var Stock = mongoose.model('Stock');
 var bcrypt = require('bcrypt-nodejs');
 var jwt = require('jsonwebtoken');
 
@@ -81,3 +82,70 @@ module.exports.authenticate = function (req,res,next){
             .json('No token provided');
     }
 };
+
+module.exports.retrieve = function(req,res){
+    var username = req.params.user;
+    User.find({
+      username: username
+    })
+    .select("-password")
+    .exec(function(err, user){
+      if (err){
+        console.log(err);
+        res
+            .status(400)
+            .json(err);
+      }else{
+          res
+                .status(200)
+                .json(user); 
+        }
+  });
+}
+
+var _addUserQuery = function(req,res, user){
+   
+    user.searches.push({
+    });
+    
+    user.save(function(err, userUpdated){
+        if (err){
+            res
+                .status(500)
+                .json(err);
+        }else{
+            res
+                .status(201)
+                .json(userUpdated.searches[userUpdated.searches.length -1]);
+        };
+            
+    });
+};
+
+
+module.exports.usersQueryAddOne = function (req,res){
+    var username = req.params.user;
+
+    User   
+        .findOne({username:username})
+        .select ('-password')
+        .exec(function(err, doc){
+            if (err){
+                console.log("error finding user")
+                res
+                    .status(500)
+                    .json(err);
+            }else if(!doc){
+                console.log("user " + username + " not found in database")
+                res
+                    .status(404)
+                    .json({
+                        "message": "user  " + username + " not found"
+                    });
+            }if (doc){
+                console.log('found user for username ' + username + " it is " + doc) 
+                _addUserQuery(req,res,doc)
+            }
+    });
+};
+

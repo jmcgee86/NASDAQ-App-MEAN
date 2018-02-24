@@ -1,4 +1,23 @@
 var mongoose = require ('mongoose');
+//var stockSchema = mongoose.model('Stock');
+
+var searchesSchema = new mongoose.Schema({
+    createdOn: {
+        type: Date,
+        "default": Date.now
+    },
+    stock:{ 
+    Symbol: String,
+    Name: String,
+    //LastSale: Number,
+    //MarketCap: Number,
+    //ADRTSO: String,
+    //IPOYear: Number,
+    //Sector: String,
+    //Industry: String,
+    SummaryQuote: String,
+    } 
+});
 
 var userSchema = new mongoose.Schema({
     username:{
@@ -12,8 +31,10 @@ var userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    
+    searches: [searchesSchema]
     
 });
 
-mongoose.model('User', userSchema);
+mongoose.model('User', userSchema, 'users');

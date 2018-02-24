@@ -22,12 +22,20 @@ router
 
 router
     .route('/users/login')
-    .post(ctrlUsers.login);
+    .post(ctrlUsers.login)
+    //.get(ctrlUsers.retrieve);
+router
+    .route('/users/:user')
+    .get(ctrlUsers.retrieve);
     
 router
     .route('/stocks/:symbol/queries')
     //.get(ctrlQueries.queriesGetAll)
     .post(ctrlQueries.queriesAddOne);
+    
+router
+    .route('/users/:user/searches')
+    .post(ctrlUsers.usersQueryAddOne);
     
 router
     .route('/queries')

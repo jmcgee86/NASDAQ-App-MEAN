@@ -1,7 +1,16 @@
     angular.module('meannasdaq').controller('SearchController', SearchController);
     
-    function SearchController($http, stockDataFactory) {
+    function SearchController($http, stockDataFactory, $route,$routeParams, $window, AuthFactory, jwtHelper ) { 
         var vm = this;
+        
+        vm.isLoggedIn = function(){
+        if (AuthFactory.isLoggedIn){
+        return true;
+        }else{
+        return false;
+        }
+    };
+        
         vm.search = function(){
             vm.isSubmitted = false;
             var symbol = vm.symbol.toUpperCase();
@@ -16,6 +25,19 @@
             }).catch(function(error){
                 console.log(error);
             });
+            if (vm.showQueriesSubmitted){
+                vm.showQueries()
+            }
+            if(vm.isLoggedIn()){
+                var token = $window.sessionStorage.token;
+                var decodedToken = jwtHelper.decodeToken(token);
+                var User = decodedToken.username;
+                var userQuery = '';
+                stockDataFactory.postUserQuery(User, userQuery).then(function(response){
+                }).catch(function(error){
+                console.log(error)
+            }
+            )}
             vm.isSubmitted = true;
             }
             });

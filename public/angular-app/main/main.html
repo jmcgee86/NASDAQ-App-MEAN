@@ -30,4 +30,6 @@
 <div ng-if = "vm.showQueriesSubmitted">
     <h3>Recent Searches:</h3>   
     <li ng-repeat = "stock in vm.stocks | orderBy: '-Queries[Queries.length - 1].createdOn'"><a ng-href="#!/stocks/{{ stock.Symbol }}">{{stock.Symbol}} | Search Date: {{stock.Queries[stock.Queries.length -1].createdOn | date}}</a></li>
+        <!--<li ng-repeat = "stock in vm.stocks.Queries | orderBy: '-Queries.createdOn'"><a ng-href="#!/stocks/{{ stock.Symbol }}">{{stock.Symbol}} | Search Date: stock.Queries.createdOn | date}}</a></li>-->
+
 </div>

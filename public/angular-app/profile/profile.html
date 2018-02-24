@@ -1,1 +1,5 @@
-<h1>This is a profile</h1>
+<h1>Hello, {{ vm.loggedUser[0].username }}</h1>
+
+<h3>Your recent searches:</h3>
+
+    <li ng-repeat="searches in vm.loggedUser[0].searches">{{searches.createdOn | date}}</li>

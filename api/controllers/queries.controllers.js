@@ -1,5 +1,8 @@
 var mongoose = require ('mongoose');
 var Stock = mongoose.model('Stock');
+var User = mongoose.model('User');
+var bcrypt = require('bcrypt-nodejs');
+var jwt = require('jsonwebtoken');
 
 var _addQuery = function (req, res, stock){
     
@@ -51,8 +54,6 @@ module.exports.queriesGetAll = function (req, res){
     Stock
         .find()
         .exists('Queries')
-        //.skip("!Queries")
-        //.sort("-Queries.createdOn")
         .exec(function(err, stocks){
             if (err){
                 console.log("Error finding stocks");
