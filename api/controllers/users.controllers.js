@@ -170,6 +170,35 @@ var _addUserStock = function(req,res, user){
     });
 };
 
+//Trying to add validation to prevent saving stock if it is already saved
+    // var _addUserStock = function(req,res, user){
+    //     User
+    //         .find({savedStocks : req.body.symbol}, function (err, docs) {
+    //         if (docs.length){
+    //             res
+    //                 .json('Already Saved!',null);
+    //         }else{
+    //         user.savedStocks.push({
+    //         symbol: req.body.symbol
+    //     });
+        
+    //     user.save(function(err, userUpdated){
+    //         if (err){
+    //             res
+    //                 .status(500)
+    //                 .json(err);
+    //         }else{
+    //             res
+    //                 .status(201)
+    //                 .json(userUpdated.searches[userUpdated.savedStocks.length -1]);
+    //         };
+                
+    //     });
+    // };
+                  
+    //     });
+    // }
+
 module.exports.usersSaveStock = function (req,res){
     var username = req.params.user;
 

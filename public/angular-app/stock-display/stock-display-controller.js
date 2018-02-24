@@ -18,6 +18,7 @@ function StockController($route, $routeParams, $window, stockDataFactory, AuthFa
     };
     
     vm.saveStock = function (){
+        vm.isSaved = false;
         var postSavedStock ={
               symbol: $routeParams.Symbol
             }
@@ -29,8 +30,10 @@ function StockController($route, $routeParams, $window, stockDataFactory, AuthFa
         stockDataFactory.saveUserStock(User, postSavedStock).then(function(response){
                 }).catch(function(error){
                 console.log(error)
-            }
-            )}
+            })
+        vm.isSaved = true;
+
+    }
 
     
     };

@@ -1,5 +1,5 @@
 var mongoose = require ('mongoose');
-//var stockSchema = mongoose.model('Stock');
+var stockSchema = mongoose.model('Stock');
 
 var searchesSchema = new mongoose.Schema({
     createdOn: {
@@ -9,12 +9,13 @@ var searchesSchema = new mongoose.Schema({
     symbol: String
 });
 
+
 var savedStocksSchema = new mongoose.Schema({
     createdOn: {
         type: Date,
         "default": Date.now
     },
-    symbol: String
+    symbol: { type: String, unique: true }
 })
 
 var userSchema = new mongoose.Schema({

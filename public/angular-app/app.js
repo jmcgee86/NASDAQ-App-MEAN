@@ -1,6 +1,6 @@
 /* global angular*/
 
-angular.module('meannasdaq', ['ngRoute', 'angular-jwt'])
+angular.module('meannasdaq', ['ngRoute', 'angular-jwt', 'angularUtils.directives.dirPagination'])
     .config(config)
     .run(run);
 

@@ -35,10 +35,8 @@ module.exports.stocksGetAll = function (req, res){
 
     Stock
         .find()
-        .skip("!LastSale")
-        .skip(offset)
-        .limit(count)
-        .sort("-LastSale")
+        .exists("LastSale", true)
+        .sort("Name")
         .exec(function(err, stocks){
             if (err){
                 console.log("Error finding stocks");

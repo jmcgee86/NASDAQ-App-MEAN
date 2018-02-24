@@ -6,4 +6,4 @@
 
 <h3>Your Saved Stocks</h3>
 
-<!--<li ng-repeat = "saved in vm.loggedUser[0].saved | orderBy: 'createdOn'"><a ng-href="#!/stocks/{{ searches.symbol }}">{{searches.symbol}}</a></li>-->
+<li ng-repeat = "saved in vm.loggedUser[0].savedStocks | orderBy: '-createdOn'"><a ng-href="#!/stocks/{{ saved.symbol }}">{{saved.symbol}}</a></li>
