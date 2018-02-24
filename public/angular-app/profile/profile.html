@@ -2,6 +2,8 @@
 
 <h3>Your recent searches:</h3>
 
-    <!--<li ng-repeat="searches in vm.loggedUser[0].searches">{{searches.symbol}} Searched on: {{searches.createdOn | date}}</li>-->
-    
-<li ng-repeat="searches in vm.loggedUser[0].searches"><a ng-href="#!/stocks/{{ searches.symbol }}">{{searches.symbol}} Searched on: {{searches.createdOn | date}}</a></li>
+<li ng-repeat="searches in vm.loggedUser[0].searches | orderBy: '-createdOn'"><a ng-href="#!/stocks/{{ searches.symbol }}">{{searches.symbol}} Searched on: {{searches.createdOn | date}}</a></li>
+
+<h3>Your Saved Stocks</h3>
+
+<!--<li ng-repeat = "saved in vm.loggedUser[0].saved | orderBy: 'createdOn'"><a ng-href="#!/stocks/{{ searches.symbol }}">{{searches.symbol}}</a></li>-->

@@ -150,3 +150,48 @@ module.exports.usersQueryAddOne = function (req,res){
     });
 };
 
+var _addUserStock = function(req,res, user){
+   
+    user.savedStocks.push({
+        symbol: req.body.symbol
+    });
+    
+    user.save(function(err, userUpdated){
+        if (err){
+            res
+                .status(500)
+                .json(err);
+        }else{
+            res
+                .status(201)
+                .json(userUpdated.searches[userUpdated.savedStocks.length -1]);
+        };
+            
+    });
+};
+
+module.exports.usersSaveStock = function (req,res){
+    var username = req.params.user;
+
+    User   
+        .findOne({username:username})
+        .select ('-password')
+        .exec(function(err, doc){
+            if (err){
+                console.log("error finding user")
+                res
+                    .status(500)
+                    .json(err);
+            }else if(!doc){
+                console.log("user " + username + " not found in database")
+                res
+                    .status(404)
+                    .json({
+                        "message": "user  " + username + " not found"
+                    });
+            }if (doc){
+                console.log('found user for username ' + username + " it is " + doc) 
+                _addUserStock(req,res,doc)
+            }
+    });
+};

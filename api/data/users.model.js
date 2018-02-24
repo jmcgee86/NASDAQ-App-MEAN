@@ -9,6 +9,14 @@ var searchesSchema = new mongoose.Schema({
     symbol: String
 });
 
+var savedStocksSchema = new mongoose.Schema({
+    createdOn: {
+        type: Date,
+        "default": Date.now
+    },
+    symbol: String
+})
+
 var userSchema = new mongoose.Schema({
     username:{
         type: String,
@@ -23,7 +31,9 @@ var userSchema = new mongoose.Schema({
         required: true
     },
     
-    searches: [searchesSchema]
+    searches: [searchesSchema],
+    
+    savedStocks: [savedStocksSchema]
     
 });
 

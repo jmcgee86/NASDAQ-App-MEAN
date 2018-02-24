@@ -40,5 +40,9 @@ router
 router
     .route('/queries')
     .get(ctrlQueries.queriesGetAll);
+    
+router
+    .route('/users/:user/save')
+    .post(ctrlUsers.usersSaveStock);
 
 module.exports = router;

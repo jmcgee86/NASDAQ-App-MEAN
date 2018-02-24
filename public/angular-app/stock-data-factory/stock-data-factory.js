@@ -7,7 +7,8 @@ function stockDataFactory($http){
         postQuery: postQuery,
         displayQueries: displayQueries,
         postUserQuery: postUserQuery,
-        getUser: getUser
+        getUser: getUser,
+        saveUserStock, saveUserStock
     };
     
     function stockList(){
@@ -32,6 +33,10 @@ function stockDataFactory($http){
     
     function getUser(User){
         return $http.get('api/users/' + User).then(complete).catch(failed);
+    }
+    
+    function saveUserStock(User, Stock){
+        return $http.post('api/users/' + User + '/save', Stock).then(complete).catch(failed);
     }
     
     function complete(response){

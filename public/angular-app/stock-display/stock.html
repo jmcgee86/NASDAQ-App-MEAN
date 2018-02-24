@@ -7,3 +7,7 @@
 <p ng-hide = "!vm.stock.IPOyear">IPO Year: {{ vm.stock.IPOyear }}</p>
 <p ng-hide = "!vm.stock.Industry">Industry: {{ vm.stock.Industry }}</p>
 <p><a href = "{{ vm.stock.SummaryQuote }}" target="_blank">More Information</a></p>
+
+<div ng-if = "vm.isLoggedIn()">
+    <button type = "submit" class = "btn btn-success" ng-click = "vm.saveStock()">Save Stock</button>
+</div>
