@@ -24,7 +24,7 @@ angular.module('meannasdaq').controller('TrendingStocksController', TrendingStoc
 
 function TrendingStocksController(stockDataFactory){
     var vm = this;
-    vm.title = 'Trending Stocks';
+    vm.title = 'Trending Stocks By:';
     vm.saleSubmitted = false;
     vm.marketSubmitted=false;
     vm.querySubmitted = false
