@@ -57,3 +57,5 @@ typings/
 # dotenv environment variables file
 .env
 
+# environmental variable for apikey from newsapi.org
+/public/angular-app/stock-display/key.js
