@@ -83,8 +83,6 @@ module.exports.stocksGetAll = function (req, res){
 
 module.exports.stocksFind = function (req,res){
     var stockSymbol = req.params.symbol;
-    //var APIKEY = process.env.KEY1;
-    //console.log('Key is:' + APIKEY + " " )
    console.log("Stock symbol is: " + stockSymbol);
     Stock
     .findOne({ Symbol: stockSymbol })
@@ -93,7 +91,6 @@ module.exports.stocksFind = function (req,res){
     var response = {
             status: 200,
             message: stock,
-            APIKEY: process.env.KEY1
         };
         if (err){
                 console.log("Error finding stock");

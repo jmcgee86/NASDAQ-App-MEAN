@@ -2,7 +2,7 @@
 
 angular.module('meannasdaq').controller('StockController', StockController);
 
-function StockController($route, $routeParams, $window, stockDataFactory, AuthFactory, jwtHelper){
+function StockController($route, $routeParams, $window, stockDataFactory, AuthFactory, jwtHelper, $timeout){
     var vm = this;
     var id = $routeParams.id;
     var Symbol = $routeParams.Symbol;
@@ -10,6 +10,7 @@ function StockController($route, $routeParams, $window, stockDataFactory, AuthFa
     stockDataFactory.stockDisplay(Symbol).then(function(response){
         vm.stock = response.data;
     });
+    
     
     vm.isLoggedIn = function(){
         if (AuthFactory.isLoggedIn){
@@ -36,75 +37,49 @@ function StockController($route, $routeParams, $window, stockDataFactory, AuthFa
         vm.isSaved = true;
 
     }
-    
-//     vm.getArticles = function(){
-        
-//         $.ajax({
-// 		method: "GET",
-// 		url: "https://newsapi.org/v2/everything",
-// 		data: {
-// 			q: "tesla",
-// 			sources: "bloomberg,business-insider,financial-times,fortune,financial-post,the-wall-street-journal,australian-financial-review",
-// 			sortBy: "relevancy",
-// 			language: "en",
-// 			apiKey: "60d74e8e84764b9e956aab8a84b11ca0"
-// 		}
-//     },
-//     	success: function(data) {
-// 			if (data.status === "ok") {
-// 				console.log(data);
-// 			}
-    
-//     )
-// }
-    
-//     $(document).ready(function() {
-// 	$.ajax({
-// 		method: "GET",
-// 		url: "https://newsapi.org/v2/everything",
-// 		data: {
-// 			//category: "general",
-// 			q: "tesla",
-// 			sources: "bloomberg,business-insider,financial-times,fortune,financial-post,the-wall-street-journal,australian-financial-review",
-// 			//from: 2015-01-01,
-// 			sortBy: "relevancy",
-// 			language: "en",
-// 			apiKey: APIKEY
-// 		},
-// 		success: function(data) {
-// 			if (data.status === "ok") {
-// 				console.log(data);
 
-// 			}
-// 		}
-// 	});
-//     }
-
-//$(document).ready(function() {
-
-vm.getArticles = function(){
-	$.ajax({
+ vm.getArticles = function(){
+     
+     if (AuthFactory.isLoggedIn){
+ 
+$.ajax({
 		method: "GET",
 		url: "https://newsapi.org/v2/everything",
 		data: {
-			//category: "general",
-			q: vm.stock.Name,
+			q: "+" + vm.stock.Name,
 			sources: "bloomberg,business-insider,financial-times,fortune,financial-post,the-wall-street-journal,australian-financial-review",
-			//from: 2015-01-01,
-			sortBy: "relevancy",
 			language: "en",
-			apiKey: APIKEY //process.env.KEY1 // //"60d74e8e84764b9e956aab8a84b11ca0"
+			sortBy: 'relevance',
+			pageSize: 10,
+			apiKey: APIKEY //APIKEY from newsapi.org - in /angular-app/stock-display/key.js
 		},
 		success: function(data) {
-			if (data.status === "ok") {
-				console.log(data);
-				
+		    console.log(data)
+		      $timeout (function(){
+		          if (data.status === "ok") {
+			    vm.articles = data.articles;
+				//console.log(data);
+			
+			if(data.articles.length>0){
+			    vm.foundArticles = true;
+			}  else{
+			    vm.noArticles = true;
 			}
+		      }
+		      })     
 		}
 	});
+     }else{
+         vm.pleaseLogin =true
+     }
 }
-//});
 
+
+    vm.tweetIt = function(articlePreview, articleUrl){
+		//var tweetArticle = data.articles[this.id].description + " via " + outlet + " " + data.articles[this.id].url;
+		window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(articlePreview + " " + articleUrl));
+							
+    }
     
     };
     
