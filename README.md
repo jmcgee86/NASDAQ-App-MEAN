@@ -24,12 +24,10 @@ Features:
         - user's saved stocks display on profile page
         - user’s search history on profile page
         - retrieve and display list of recent articles about stock using API from newsapi.org
-        - tweet summary and url to article with 'Tweet It'
+        - tweet summary and url to article with 'Tweet It' button
         - save article to user's 'reading list' on profile page
 
 Future improvements/fixes:
-    - add authentication to prevent user from saving stock or article if it is already saved
+    - add validation to prevent user from saving stock or article if it is already saved
     - allow user to remove saved articles/stocks
     - create a mock buy/sell system
-
-
