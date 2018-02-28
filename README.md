@@ -19,6 +19,7 @@ Features:
         - search by symbol
         - see recent searches
         - view 'trending stocks' sorted by market cap, sale price, and most searched
+        - top financial headlines on main page using API from newsapi.org
 
     - Logged in only features:
         - user's saved stocks display on profile page

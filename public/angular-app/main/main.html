@@ -42,7 +42,9 @@
       <a ng-href="{{ article.url }}">{{ article.title }}</a>
       <p> {{article.source.name}}</p>
       <p> {{article.description}}</p>
-      <img ng-src="{{article.urlToImage}}" height="100%" width = "100%"> 
+      <img ng-src="{{article.urlToImage}}" height="100%" width = "100%">
+     <button ng-if = "vm.isLoggedIn()" class= "btn btn-primary twitterbtn" ng-click="vm.tweetIt(article.description, article.url)">Tweet it</button>
+     <button ng-if = "vm.isLoggedIn()" class = "btn btn-primary saveArtBtn" ng-click = "vm.saveArticle(article.title, article.url, article.source.name)">Save Article</button>
     </div>    
   </div>
 </div>

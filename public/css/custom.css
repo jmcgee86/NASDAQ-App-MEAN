@@ -47,6 +47,7 @@ small{
 .twitterbtn{
     background-color: #00aced;
     color: white;
+    margin: 5px;
 }
 
 a{
@@ -62,4 +63,5 @@ a{
 
 .saveArtBtn{
     background-color: #34495e;
+    margin: 5px;
 }
