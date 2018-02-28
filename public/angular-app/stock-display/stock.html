@@ -14,19 +14,16 @@
     <p ng-if="vm.isSaved">Saved!</p>
 </div>
 
-
 <button type = "submit" class = "btn btn-success myBtn" ng-click = "vm.getArticles()">Get Recent Articles About {{vm.stock.Name}}</button> 
-
-<!--<li ng-if = "vm.foundArticles" ng-repeat = "article in vm.articles"><a ng-href="#!/stocks/{{ stock.Symbol }}">{{article.title}}</a></li>-->
 
 <div class = "articleDiv" ng-if = "vm.foundArticles" ng-repeat="article in vm.articles | orderBy:'-publishedAt'">
         <a ng-href="{{ article.url }}">{{ article.title }}</a>
         <p> {{article.source.name}} -{{article.publishedAt | date}}</p>
         <p> {{article.description}}</p>
         <button class= "btn btn-primary twitterbtn" ng-click="vm.tweetIt(article.description, article.url)">Tweet it</button>
+        <button class = "btn btn-primary myBtn" ng-click = "vm.saveArticle(article.title, article.url)">Save Article</button>
 </div>
 
 <div ng-if = "vm.noArticles" class = "alert alert-danger" role = "alert ">Sorry, no articles on {{vm.stock.Name}} available</div>
 
-<div ng-if = "vm.pleaseLogin" class="alert alert-danger" role="alert">Sorry, this is a premium feature and only available for registered users. Please register or login now.</div>
-<!--<p ng-if = "vm.pleaseLogin"></p>-->
+<div ng-if  = "vm.pleaseLogin" class="alert alert-danger" role="alert">Sorry, this feature is only available for registered users. Please register or login now.</div>

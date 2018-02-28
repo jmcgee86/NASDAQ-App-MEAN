@@ -48,4 +48,8 @@ router
     .route('/users/:user/save')
     .post(ctrlUsers.usersSaveStock);
 
+router
+    .route('/users/:user/articles')
+    .post(ctrlUsers.usersSaveArticle);
+
 module.exports = router;

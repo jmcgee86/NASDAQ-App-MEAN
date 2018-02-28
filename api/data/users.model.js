@@ -1,6 +1,15 @@
 var mongoose = require ('mongoose');
 var stockSchema = mongoose.model('Stock');
 
+var articlesSchema = new mongoose.Schema({
+   createdOn: {
+       type: Date,
+       "default": Date.now
+   },
+   title: String,
+   url: String
+});
+
 var searchesSchema = new mongoose.Schema({
     createdOn: {
         type: Date,
@@ -34,7 +43,9 @@ var userSchema = new mongoose.Schema({
     
     searches: [searchesSchema],
     
-    savedStocks: [savedStocksSchema]
+    savedStocks: [savedStocksSchema],
+    
+    savedArticles: [articlesSchema]
     
 });
 

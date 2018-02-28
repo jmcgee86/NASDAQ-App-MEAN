@@ -9,7 +9,8 @@ function stockDataFactory($http){
         postUserQuery: postUserQuery,
         getUser: getUser,
         saveUserStock, saveUserStock,
-        stockTrending: stockTrending
+        stockTrending: stockTrending,
+        saveUserArticle: saveUserArticle
     };
     
     function stockList(){
@@ -32,14 +33,15 @@ function stockDataFactory($http){
         return $http.post('api/users/' + User + '/searches', userQuery).then(complete).catch(failed);
     }
     
+    
+    function saveUserArticle(User, userArticle){
+        return $http.post('api/users/' + User + '/articles', userArticle).then(complete).catch(failed);
+    }
+    
     function getUser(User){
         return $http.get('api/users/' + User).then(complete).catch(failed);
     }
-    
-    // function stockTrendingSale(){
-    //     return $http.get('api/trending/').then(complete).catch(failed);
-    // }
-    
+
     function stockTrending(selection){
         return $http.get('api/trending/'+selection).then(complete).catch(failed);
     }

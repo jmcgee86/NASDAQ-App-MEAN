@@ -1,4 +1,7 @@
+
 require('./api/data/db.js');
+//require('dotenv').config(); - use to get environmental variable for news API, not working
+
 var express = require('express');
 var app = express();
 var path = require ('path');

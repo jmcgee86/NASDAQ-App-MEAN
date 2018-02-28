@@ -76,11 +76,27 @@ $.ajax({
 
 
     vm.tweetIt = function(articlePreview, articleUrl){
-		//var tweetArticle = data.articles[this.id].description + " via " + outlet + " " + data.articles[this.id].url;
 		window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(articlePreview + " " + articleUrl));
 							
     }
+  
+   vm.saveArticle = function( articleTitle, articleUrl){
+        var token = $window.sessionStorage.token;
+        var decodedToken = jwtHelper.decodeToken(token);
+        var User = decodedToken.username;
+        var postUserArticle = {
+          title: articleTitle,
+          url: articleUrl
+        }  
+      
+      stockDataFactory.saveUserArticle(User, postUserArticle).then(function(response){
+                }).catch(function(error){
+                console.log(error)
+            })
+    }
     
     };
+    
+  
     
     

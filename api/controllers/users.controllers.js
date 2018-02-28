@@ -171,13 +171,45 @@ var _addUserStock = function(req,res, user){
 };
 
 //Trying to add validation to prevent saving stock if it is already saved
+
     // var _addUserStock = function(req,res, user){
-    //     User
-    //         .find({savedStocks : req.body.symbol}, function (err, docs) {
-    //         if (docs.length){
+    //  if   ({'user.savedStocks.symbol' : req.body.symbol}){
+            
+    //             console.log('already saved' + req.body.symbol)
     //             res
     //                 .json('Already Saved!',null);
     //         }else{
+    //         console.log('saving '+ req.body.symbol)
+    //         user.savedStocks.push({
+    //         symbol: req.body.symbol
+    //     });
+        
+    //     user.save(function(err, userUpdated){
+    //         if (err){
+    //             res
+    //                 .status(500)
+    //                 .json(err);
+    //         }else{
+    //             res
+    //                 .status(201)
+    //                 .json(userUpdated.searches[userUpdated.savedStocks.length -1]);
+    //         };
+                
+    //     });
+    // };
+                  
+    //     };
+    
+
+    // var _addUserStock = function(req,res, user){
+    //     user
+    //         .find({'savedStocks.symbol' : req.body.symbol}, function (err, docs) {
+    //         if (docs){
+    //             console.log('already saved' + req.body.symbol)
+    //             res
+    //                 .json('Already Saved!',null);
+    //         }else{
+    //             console.log('saving '+ req.body.symbol)
     //         user.savedStocks.push({
     //         symbol: req.body.symbol
     //     });
@@ -221,6 +253,56 @@ module.exports.usersSaveStock = function (req,res){
             }if (doc){
                 console.log('found user for username ' + username + " it is " + doc) 
                 _addUserStock(req,res,doc)
+            }
+    });
+};
+
+
+
+var _addUserArticle = function(req,res, user){
+   
+    user.savedArticles.push({
+        title: req.body.title,
+        url: req.body.url
+        
+    });
+    
+    user.save(function(err, userUpdated){
+        if (err){
+            res
+                .status(500)
+                .json(err);
+        }else{
+            res
+                .status(201)
+                .json(userUpdated.savedArticles[userUpdated.savedArticles.length -1]);
+        };
+            
+    });
+};
+
+module.exports.usersSaveArticle = function (req,res){
+    var username = req.params.user;
+
+    User   
+        .findOne({username:username})
+        .select ('-password')
+        .exec(function(err, doc){
+            if (err){
+                console.log("error finding user")
+                res
+                    .status(500)
+                    .json(err);
+            }else if(!doc){
+                console.log("user " + username + " not found in database")
+                res
+                    .status(404)
+                    .json({
+                        "message": "user  " + username + " not found"
+                    });
+            }if (doc){
+                console.log('found user for username ' + username + " it is " + doc) 
+                _addUserArticle(req,res,doc)
             }
     });
 };
