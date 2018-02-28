@@ -32,6 +32,7 @@ small{
     background-color: #95a5a6;
     margin-top: 5px;
     padding: 10px;
+    border-radius: 15px;
 }
 
 .articleDiv p{
@@ -43,6 +44,10 @@ small{
     font-size: 1.2em;
 }
 
+.articleDiv h3{
+    color: #34495e;
+}
+
 
 .twitterbtn{
     background-color: #00aced;
@@ -51,7 +56,6 @@ small{
 }
 
 a{
-    /*color: #1dcaff;*/
     color: #0084b4;
     text-decoration: underline;
 }
