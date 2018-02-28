@@ -58,8 +58,7 @@ $.ajax({
 		      $timeout (function(){
 		          if (data.status === "ok") {
 			    vm.articles = data.articles;
-				//console.log(data);
-			
+
 			if(data.articles.length>0){
 			    vm.foundArticles = true;
 			}  else{

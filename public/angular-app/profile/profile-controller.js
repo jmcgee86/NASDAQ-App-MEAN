@@ -6,7 +6,6 @@ function ProfileController($route,$routeParams, $window, stockDataFactory, AuthF
     var decodedToken = jwtHelper.decodeToken(token);
     var User = decodedToken.username;
     stockDataFactory.getUser(User).then(function(response) {
-        //console.log(response);
         if(!response){
             vm.error = "Cannot find user";
         }else{

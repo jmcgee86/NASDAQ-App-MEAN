@@ -24,7 +24,6 @@ var _addQuery = function (req, res, stock){
 };
 
 module.exports.queriesAddOne = function (req,res){
-    //var stockId = req.params.stockId;
     var stockSymbol = req.params.symbol;
 
     Stock    
