@@ -7,7 +7,8 @@ var articlesSchema = new mongoose.Schema({
        "default": Date.now
    },
    title: String,
-   url: String
+   url: String,
+   articleSource: String
 });
 
 var searchesSchema = new mongoose.Schema({

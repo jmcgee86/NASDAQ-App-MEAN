@@ -1,7 +1,34 @@
     angular.module('meannasdaq').controller('SearchController', SearchController);
     
-    function SearchController($http, stockDataFactory, $route,$routeParams, $window, AuthFactory, jwtHelper ) { 
+    function SearchController($http, stockDataFactory, $route,$routeParams, $window, AuthFactory, jwtHelper, $timeout ) { 
         var vm = this;
+        
+        $.ajax({
+		method: "GET",
+		url: "https://newsapi.org/v2/top-headlines",
+		data: {
+			category: "business",
+			//sources: "bloomberg,business-insider,financial-times,fortune,financial-post,the-wall-street-journal,australian-financial-review",
+			country: "us",
+			//sortBy: 'relevance',
+			pageSize: 10,
+			apiKey: APIKEY //APIKEY from newsapi.org - in /angular-app/stock-display/key.js
+		},
+		success: function(data) {
+		    console.log(data)
+		      $timeout (function(){
+		          if (data.status === "ok") {
+			    vm.articles = data.articles;
+
+			if(data.articles.length>0){
+			    vm.foundArticles = true;
+			}  else{
+			    vm.noArticles = true;
+			}
+		      }
+		      })     
+		}
+	});
         
         vm.isLoggedIn = function(){
         if (AuthFactory.isLoggedIn){

@@ -21,7 +21,7 @@
         <p> {{article.source.name}} -{{article.publishedAt | date}}</p>
         <p> {{article.description}}</p>
         <button class= "btn btn-primary twitterbtn" ng-click="vm.tweetIt(article.description, article.url)">Tweet it</button>
-        <button class = "btn btn-primary saveArtBtn" ng-click = "vm.saveArticle(article.title, article.url)">Save Article</button>
+        <button class = "btn btn-primary saveArtBtn" ng-click = "vm.saveArticle(article.title, article.url, article.source.name)">Save Article</button>
 </div>
 
 <div ng-if = "vm.noArticles" class = "alert alert-danger" role = "alert ">Sorry, no articles on {{vm.stock.Name}} available</div>

@@ -263,7 +263,8 @@ var _addUserArticle = function(req,res, user){
    
     user.savedArticles.push({
         title: req.body.title,
-        url: req.body.url
+        url: req.body.url,
+        articleSource: req.body.articleSource
         
     });
     

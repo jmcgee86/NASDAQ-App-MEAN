@@ -79,15 +79,16 @@ $.ajax({
 							
     }
   
-   vm.saveArticle = function( articleTitle, articleUrl){
+   vm.saveArticle = function( articleTitle, articleUrl, articleSource){
         var token = $window.sessionStorage.token;
         var decodedToken = jwtHelper.decodeToken(token);
         var User = decodedToken.username;
         var postUserArticle = {
           title: articleTitle,
-          url: articleUrl
-        }  
-      
+          url: articleUrl,
+          articleSource: articleSource
+        }
+        
       stockDataFactory.saveUserArticle(User, postUserArticle).then(function(response){
                 }).catch(function(error){
                 console.log(error)
