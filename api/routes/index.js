@@ -50,5 +50,9 @@ router
 router
     .route('/users/:user/articles')
     .post(ctrlUsers.usersSaveArticle);
+    
+router
+    .route('/users/:user/articles/:articleId')
+    .delete(ctrlUsers.deleteSavedArticle);
 
 module.exports = router;

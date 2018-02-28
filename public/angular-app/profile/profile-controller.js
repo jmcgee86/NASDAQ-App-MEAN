@@ -15,4 +15,19 @@ function ProfileController($route,$routeParams, $window, stockDataFactory, AuthF
             }
             }).catch(function(error){
                 console.log(error);
-            });;}
+            });
+            
+            
+    vm.deleteArticle = function (articleId){
+        var token = $window.sessionStorage.token;
+        var decodedToken = jwtHelper.decodeToken(token);
+        var User = decodedToken.username;
+
+        
+      stockDataFactory.deleteSavedArticle(User, articleId).then(function(response){
+                }).catch(function(error){
+                console.log(error)
+            })
+    
+    }
+}

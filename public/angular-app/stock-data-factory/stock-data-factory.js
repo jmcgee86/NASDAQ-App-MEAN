@@ -10,7 +10,8 @@ function stockDataFactory($http){
         getUser: getUser,
         saveUserStock, saveUserStock,
         stockTrending: stockTrending,
-        saveUserArticle: saveUserArticle
+        saveUserArticle: saveUserArticle,
+        deleteSavedArticle: deleteSavedArticle
     };
     
     function stockList(){
@@ -48,6 +49,10 @@ function stockDataFactory($http){
     
     function saveUserStock(User, Stock){
         return $http.post('api/users/' + User + '/save', Stock).then(complete).catch(failed);
+    }
+    
+    function deleteSavedArticle(User, articleId){
+        return $http.delete('api/users/' + User + '/articles/'+ articleId)
     }
     
     function complete(response){

@@ -11,4 +11,4 @@
 
 <h3>Your Reading List</h3>
 
-<li ng-repeat = "articles in vm.loggedUser[0].savedArticles | orderBy: '-createdOn'"><a ng-href = {{articles.url}}>{{articles.title}} - {{articles.articleSource}}</a></li>
+<li ng-repeat = "articles in vm.loggedUser[0].savedArticles | orderBy: '-createdOn'"><a ng-href = {{articles.url}}>{{articles.title}} - {{articles.articleSource}}</a><button class = "myBtn" ng-click = "vm.deleteArticle(articles._id)">Delete Article</button></li>
