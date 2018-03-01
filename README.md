@@ -27,8 +27,9 @@ Features:
         - retrieve and display list of recent articles about stock using API from newsapi.org
         - tweet summary and url to article with 'Tweet It' button
         - save article to user's 'reading list' on profile page
-
+        - buttons to remove saved articles and and stocks from user profile 
+        
 Future improvements/fixes:
-    - add validation to prevent user from saving stock or article if it is already saved
-    - allow user to remove saved articles/stocks
+
+    - add validation to prevent user from saving a stock or article if it is already saved
     - create a mock buy/sell system

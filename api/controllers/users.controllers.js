@@ -320,7 +320,6 @@ module.exports.deleteSavedArticle = function (req, res){
     User   
         .findOne({username:username})
         .select("savedArticles")
-        //.select('-password')//only returns reviews instead of all the hotel data
         .exec(function(err, foundUser){
             var response = {
                 status: 200,
@@ -337,10 +336,7 @@ module.exports.deleteSavedArticle = function (req, res){
                         message: 'user not found: ' + foundUser
                     };
             }else{
-             console.log('deleting artilce for:' + foundUser +  "article is:" + articleId);
-             console.log('res mess:' + foundUser.savedArticles.id(articleId));
             response.message = foundUser.savedArticles.id(articleId);
-            console.log("does it log the res.mes")
             if (!response.message){
                 response.status = 404;
                 response.message ={
@@ -368,5 +364,63 @@ module.exports.deleteSavedArticle = function (req, res){
                 };
              
         });
+   
+};
+
+module.exports.deleteSavedStock = function (req, res){
+    var username = req.params.user;
+
+    console.log("GET user", username);
+    var stockId = req.params.stockId;
+    console.log("GET stockId " + stockId);
     
+
+    User   
+        .findOne({username:username})
+        .select("savedStocks")
+        .exec(function(err, foundUser){
+            var response = {
+                status: 200,
+                message: {}
+            };
+            if (err){
+                console.log("error finding user")
+                response.status = 500;
+                response.message = err;
+            }else if(!foundUser){
+                console.log("user not found in database", foundUser)
+                response.status = 404;
+                response.message = {
+                        message: 'user not found: ' + foundUser
+                    };
+            }else{
+            response.message = foundUser.savedStocks.id(stockId);
+            if (!response.message){
+                response.status = 404;
+                response.message ={
+                        "message": "stock ID of " + stockId + " not found"
+                    };
+                }
+            }if(response.status != 200){
+                    res
+                        .status(response.status)
+                        .json(response.message);
+                }else{
+                foundUser.savedStocks.id(stockId).remove();
+                 foundUser.save(function(err, saveStockUpdated){
+                    if(err){
+                        res
+                            .status(500)
+                            .json(err);
+                    }else{
+                        console.log('tried to update', saveStockUpdated);
+                        res
+                            .status(204)
+                            .json(saveStockUpdated);
+                    }
+                });
+                };
+             
+        });
+   
 };

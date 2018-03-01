@@ -45,7 +45,7 @@ router
     
 router
     .route('/users/:user/save')
-    .post(ctrlUsers.usersSaveStock);
+    .post(ctrlUsers.usersSaveStock)
 
 router
     .route('/users/:user/articles')
@@ -54,5 +54,10 @@ router
 router
     .route('/users/:user/articles/:articleId')
     .delete(ctrlUsers.deleteSavedArticle);
+    
+router
+    .route('/users/:user/save/:stockId')
+    .delete(ctrlUsers.deleteSavedStock);
+
 
 module.exports = router;

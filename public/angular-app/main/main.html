@@ -22,7 +22,7 @@
           <p>Market Cap: {{ vm.stock.MarketCap | number: fractionSize }}</p>
           <p ng-hide = "!vm.stock.IPOyear">IPO Year: {{ vm.stock.IPOyear }}</p>
           <p ng-hide = "!vm.stock.Industry">Industry: {{ vm.stock.Industry }}</p>
-          <p><a href = "#!/stocks/{{ vm.stock.Symbol }}">More Information</a></p>
+          <p><a href = "#!/stocks/{{ vm.stock.Symbol }}">Go to Stock Page</a></p>
         
         </div>
       </div>
