@@ -58,6 +58,10 @@ router
 router
     .route('/users/:user/save/:stockId')
     .delete(ctrlUsers.deleteSavedStock);
-
+    
+// router
+//     .route('/users/:user/transaction/:stockSymbol')
+//     .post(ctrlUsers.buyStock)
+//     .put(ctrlUsers.sellStock)
 
 module.exports = router;

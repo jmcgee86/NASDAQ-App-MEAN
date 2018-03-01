@@ -19,6 +19,16 @@ var searchesSchema = new mongoose.Schema({
     symbol: String
 });
 
+// var ownedStocksSchema = new mongoose.Schema({
+//     createdOn: {
+//         type: Date,
+//         "default": Date.now
+//     },
+//     stockSymbol: String,
+//     buyPrice: Number,
+//     shares: Number
+// })
+
 
 var savedStocksSchema = new mongoose.Schema({
     createdOn: {
@@ -46,7 +56,11 @@ var userSchema = new mongoose.Schema({
     
     savedStocks: [savedStocksSchema],
     
-    savedArticles: [articlesSchema]
+    savedArticles: [articlesSchema],
+    
+    //ownedStocks: [ownedStocksSchema],
+    
+    //yourBalance: Number
     
 });
 
