@@ -101,7 +101,7 @@ module.exports.retrieve = function(req,res){
                 .json(user); 
         }
   });
-}
+};
 
 var _addUserQuery = function(req,res, user){
    
@@ -118,7 +118,7 @@ var _addUserQuery = function(req,res, user){
             res
                 .status(201)
                 .json(userUpdated.searches[userUpdated.searches.length -1]);
-        };
+        }
             
     });
 };
@@ -132,26 +132,27 @@ module.exports.usersQueryAddOne = function (req,res){
         .select ('-password')
         .exec(function(err, doc){
             if (err){
-                console.log("error finding user")
+                console.log("error finding user");
                 res
                     .status(500)
                     .json(err);
             }else if(!doc){
-                console.log("user " + username + " not found in database")
+                console.log("user " + username + " not found in database");
                 res
                     .status(404)
                     .json({
                         "message": "user  " + username + " not found"
                     });
             }if (doc){
-                console.log('found user for username ' + username + " it is " + doc) 
-                _addUserQuery(req,res,doc)
+                console.log('found user for username ' + username + " it is " + doc);
+                _addUserQuery(req,res,doc);
             }
     });
 };
 
 var _addUserStock = function(req,res, user){
-   
+    var thisSymbol = req.body.symbol;
+    //    console.log('Does this exist: ' + user.savedArticles.symbol(thisSymbol))
     user.savedStocks.push({
         symbol: req.body.symbol
     });
@@ -165,7 +166,7 @@ var _addUserStock = function(req,res, user){
             res
                 .status(201)
                 .json(userUpdated.searches[userUpdated.savedStocks.length -1]);
-        };
+        }
             
     });
 };
@@ -260,7 +261,6 @@ module.exports.usersSaveStock = function (req,res){
 
 
 var _addUserArticle = function(req,res, user){
-   
     user.savedArticles.push({
         title: req.body.title,
         url: req.body.url,
@@ -424,3 +424,55 @@ module.exports.deleteSavedStock = function (req, res){
         });
    
 };
+
+var _addUserBoughtStock = function(req,res, user){
+    user.ownedStocks.push({
+        stockSymbol: req.body.stockSymbol,
+        buyPrice: req.body.stockPrice,
+        shares: req.body.shares,
+        totalPrice: req.body.totalPrice
+
+        
+    });
+    
+    user.save(function(err, userUpdated){
+        if (err){
+            res
+                .status(500)
+                .json(err);
+        }else{
+            res
+                .status(201)
+                .json(userUpdated.ownedStocks[userUpdated.ownedStocks.length -1]);
+        };
+            
+    });
+};
+
+
+module.exports.buyStock = function (req,res){
+    var username = req.params.user;
+
+    User   
+        .findOne({username:username})
+        .select ('-password')
+        .exec(function(err, doc){
+            if (err){
+                console.log("error finding user")
+                res
+                    .status(500)
+                    .json(err);
+            }else if(!doc){
+                console.log("user " + username + " not found in database")
+                res
+                    .status(404)
+                    .json({
+                        "message": "user  " + username + " not found"
+                    });
+            }if (doc){
+                console.log('found user for username ' + username + " it is " + doc) 
+                _addUserBoughtStock(req,res, doc)
+            }
+    });
+};
+

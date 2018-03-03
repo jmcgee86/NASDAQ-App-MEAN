@@ -13,7 +13,7 @@ function stockDataFactory($http){
         saveUserArticle: saveUserArticle,
         deleteSavedArticle: deleteSavedArticle,
         deleteSavedStock: deleteSavedStock,
-        // buyStock: buyStock,
+        buyStock: buyStock,
         // sellStock: sellStock
     };
     
@@ -62,12 +62,12 @@ function stockDataFactory($http){
         return $http.delete('/api/users/' + User + '/save/' + stockId)
     }
     
-    // function buyStock(User, stockSymbol){
-    //     return $http.post('/api/users/' + User + '/trade/' + stockSymbol)
-    // }
+    function buyStock(User, buyInfo){
+        return $http.post('/api/users/' + User + '/trade/', buyInfo)
+    }
     
-    // function sellStock(User, stockSymbol){
-    //     return $http.put('/api/users' + User + '/trade/' + stockSymbol)
+    // function sellStock(User, sellInfo){
+    //     return $http.put('/api/users' + User + '/trade/' + sellInfo)
     // }
     
     function complete(response){

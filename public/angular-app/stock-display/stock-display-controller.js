@@ -95,6 +95,25 @@ $.ajax({
             })
     }
     
+    vm.buyStock = function (){
+        var token = $window.sessionStorage.token;
+        var decodedToken = jwtHelper.decodeToken(token);
+        var User = decodedToken.username;
+        var totalPrice = parseInt(vm.shares) * vm.stock.LastSale //need to double check variables and function
+        
+        var buyInfo = {
+            stockSymbol: $routeParams.Symbol,
+            stockPrice: vm.stock.LastSale, //need to double check exact vm.....
+            shares: vm.shares, //this comes from user form input on stock.html
+            totalPrice: totalPrice
+        }
+        stockDataFactory.buyStock(User, buyInfo).then(function(response){
+        }).catch(function(error){
+            console.log(error)
+        });
+    
+    }
+    
     };
     
   

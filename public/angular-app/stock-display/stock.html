@@ -14,7 +14,18 @@
     <p ng-if="vm.isSaved">Saved!</p>
 </div>
 
+
+<form ng-if = "vm.isLoggedIn()" name = "buy" ng-submit = "vm.buyStock()">
+    <div class="form-group">
+        <label for="shares">Amount</label>
+        <input type="number" class="form-control" id="shares" placeholder="Shares to buy" ng-model="vm.shares">
+    </div>
+  <button type="submit" class="btn btn-success">Buy</button>
+</form>
+
+
 <button type = "submit" class = "btn btn-success myBtn" ng-click = "vm.getArticles()">Get Recent Articles About {{vm.stock.Name}}</button> 
+
 
 <div class = "articleDiv" ng-if = "vm.foundArticles" ng-repeat="article in vm.articles | orderBy:'-publishedAt'">
         <a ng-href="{{ article.url }}">{{ article.title }}</a>
