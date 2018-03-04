@@ -18,10 +18,17 @@
 <form ng-if = "vm.isLoggedIn()" name = "buy" ng-submit = "vm.buyStock()">
     <div class="form-group">
         <label for="shares">Amount</label>
-        <input type="number" class="form-control" id="shares" placeholder="Shares to buy" ng-model="vm.shares">
+        <input type="number" class="form-control" name="shares" id="shares" placeholder="Shares to buy" ng-model="vm.shares">
     </div>
+    <p  ng-hide = "buy.shares.$pristine" ng-if= "buy.shares.$dirty">Total Price for {{vm.shares}} shares: {{vm.shares * vm.stock.LastSale | currency}}</p>
+
   <button type="submit" class="btn btn-success">Buy</button>
 </form>
+
+
+
+<div ng-if = "vm.noFunds" class = "alert alert-danger" role = "alert ">Sorry, insufficient funds for purchase</div>
+<div ng-if = "vm.sale">Stock purchased!</div>
 
 
 <button type = "submit" class = "btn btn-success myBtn" ng-click = "vm.getArticles()">Get Recent Articles About {{vm.stock.Name}}</button> 

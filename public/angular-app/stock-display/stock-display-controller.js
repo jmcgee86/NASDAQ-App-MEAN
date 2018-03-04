@@ -6,6 +6,21 @@ function StockController($route, $routeParams, $window, stockDataFactory, AuthFa
     var vm = this;
     var id = $routeParams.id;
     var Symbol = $routeParams.Symbol;
+    var token = $window.sessionStorage.token;
+    var decodedToken = jwtHelper.decodeToken(token);
+    var User = decodedToken.username;
+
+stockDataFactory.getUser(User).then(function(response) {
+        if(!response){
+            vm.error = "Cannot find user";
+        }else{
+            vm.loggedUser = response.data;
+            console.log(vm.loggedUser);
+            console.log(vm.loggedUser[0].username);
+            }
+            }).catch(function(error){
+                console.log(error);
+            });
     
     stockDataFactory.stockDisplay(Symbol).then(function(response){
         vm.stock = response.data;
@@ -101,17 +116,24 @@ $.ajax({
         var User = decodedToken.username;
         var totalPrice = parseInt(vm.shares) * vm.stock.LastSale //need to double check variables and function
         
+        if(vm.loggedUser[0].yourBalance<totalPrice){
+            vm.noFunds = true;
+        }
+        else{
+        
         var buyInfo = {
             stockSymbol: $routeParams.Symbol,
             stockPrice: vm.stock.LastSale, //need to double check exact vm.....
             shares: vm.shares, //this comes from user form input on stock.html
             totalPrice: totalPrice
         }
+
         stockDataFactory.buyStock(User, buyInfo).then(function(response){
         }).catch(function(error){
             console.log(error)
         });
-    
+        vm.sale = true;
+        }
     }
     
     };

@@ -431,9 +431,9 @@ var _addUserBoughtStock = function(req,res, user){
         buyPrice: req.body.stockPrice,
         shares: req.body.shares,
         totalPrice: req.body.totalPrice
-
-        
     });
+    
+    user.yourBalance -= req.body.totalPrice;
     
     user.save(function(err, userUpdated){
         if (err){
@@ -470,8 +470,16 @@ module.exports.buyStock = function (req,res){
                         "message": "user  " + username + " not found"
                     });
             }if (doc){
+                if(doc.yourBalance < req.body.totalPrice){
+                    //var insufficient = {warning: "Insufficient funds for purchase"}
+                    res
+                        .status(200)
+                        .json({"warning": "Insufficient funds for purchase"});
+                        console.log("should be alerting insufficient");
+                }else{
                 console.log('found user for username ' + username + " it is " + doc) 
                 _addUserBoughtStock(req,res, doc)
+                }
             }
     });
 };
