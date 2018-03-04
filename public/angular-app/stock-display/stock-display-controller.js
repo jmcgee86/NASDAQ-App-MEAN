@@ -23,7 +23,17 @@ function StockController($route, $routeParams, $window, stockDataFactory, AuthFa
         $.ajax({
           url:'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + Symbol + '&interval=1min&apikey=' + stockPriceKey,
           success: function(priceData){
-              console.log(priceData);
+                console.log(priceData);
+            		      $timeout (function(){
+		          if (priceData) {
+		              console.log("if yes")
+			    vm.priceData = priceData;
+                vm.lastUpdated = priceData["Meta Data"]["3. Last Refreshed"];
+                var mostRecent = priceData["Time Series (1min)"][vm.lastUpdated]
+                vm.currentPrice = mostRecent["4. close"];
+		      }
+		      }) 
+
           }
         })
     })
