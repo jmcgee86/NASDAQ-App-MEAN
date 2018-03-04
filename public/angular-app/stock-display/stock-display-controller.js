@@ -1,4 +1,4 @@
-/*global $ APIKEY */
+/*global $ APIKEY stockPriceKey */
 
 angular.module('meannasdaq').controller('StockController', StockController);
 
@@ -6,27 +6,7 @@ function StockController($route, $routeParams, $window, stockDataFactory, AuthFa
     var vm = this;
     var id = $routeParams.id;
     var Symbol = $routeParams.Symbol;
-    var token = $window.sessionStorage.token;
-    var decodedToken = jwtHelper.decodeToken(token);
-    var User = decodedToken.username;
 
-stockDataFactory.getUser(User).then(function(response) {
-        if(!response){
-            vm.error = "Cannot find user";
-        }else{
-            vm.loggedUser = response.data;
-            console.log(vm.loggedUser);
-            console.log(vm.loggedUser[0].username);
-            }
-            }).catch(function(error){
-                console.log(error);
-            });
-    
-    stockDataFactory.stockDisplay(Symbol).then(function(response){
-        vm.stock = response.data;
-    });
-    
-    
     vm.isLoggedIn = function(){
         if (AuthFactory.isLoggedIn){
         return true;
@@ -34,6 +14,19 @@ stockDataFactory.getUser(User).then(function(response) {
         return false;
         }
     };
+    
+    stockDataFactory.stockDisplay(Symbol).then(function(response){
+        vm.stock = response.data;
+    });
+
+    $(document).ready(function(){
+        $.ajax({
+          url:'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + Symbol + '&interval=1min&apikey=' + stockPriceKey,
+          success: function(priceData){
+              console.log(priceData);
+          }
+        })
+    })
     
     vm.saveStock = function (){
         vm.isSaved = false;
@@ -114,9 +107,18 @@ $.ajax({
         var token = $window.sessionStorage.token;
         var decodedToken = jwtHelper.decodeToken(token);
         var User = decodedToken.username;
-        var totalPrice = parseInt(vm.shares) * vm.stock.LastSale //need to double check variables and function
-        
-        if(vm.loggedUser[0].yourBalance<totalPrice){
+                var totalPrice = parseInt(vm.shares) * vm.stock.LastSale //need to double check variables and function
+
+        stockDataFactory.getUser(User).then(function(response) {
+        if(!response){
+            vm.error = "Cannot find user";
+        }else{
+            
+            vm.loggedUser = response.data;
+            console.log(vm.loggedUser);
+            console.log(vm.loggedUser[0].username);
+                    if(vm.loggedUser[0].yourBalance<totalPrice){
+
             vm.noFunds = true;
         }
         else{
@@ -134,7 +136,14 @@ $.ajax({
         });
         vm.sale = true;
         }
+            }
+        
+            }).catch(function(error){
+                console.log(error);
+            });
+        
     }
+    
     
     };
     

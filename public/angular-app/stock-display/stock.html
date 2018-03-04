@@ -11,7 +11,7 @@
 <div ng-if = "vm.isLoggedIn()">
     <button type = "submit" class = "btn btn-success myBtn" ng-click = "vm.saveStock()">Save Stock</button>
     <br>
-    <p ng-if="vm.isSaved">Saved!</p>
+    <p ng-if="vm.isSaved" class= "alert alert-success" role = "alert">Saved!</p>
 </div>
 
 
@@ -27,8 +27,8 @@
 
 
 
-<div ng-if = "vm.noFunds" class = "alert alert-danger" role = "alert ">Sorry, insufficient funds for purchase</div>
-<div ng-if = "vm.sale">Stock purchased!</div>
+<div ng-if = "vm.noFunds" ng-hide = "vm.sale" class = "alert alert-danger" role = "alert ">Sorry, insufficient funds for purchase</div>
+<div ng-if = "vm.sale" class = "alert alert-success" role = "alert">{{vm.shares}} shares of {{vm.stock.Name}} purchased!</div>
 
 
 <button type = "submit" class = "btn btn-success myBtn" ng-click = "vm.getArticles()">Get Recent Articles About {{vm.stock.Name}}</button> 
@@ -44,4 +44,4 @@
 
 <div ng-if = "vm.noArticles" class = "alert alert-danger" role = "alert ">Sorry, no articles on {{vm.stock.Name}} available</div>
 
-<div ng-if  = "vm.pleaseLogin" class="alert alert-danger" role="alert">Sorry, this feature is only available for registered users. Please register or login now.</div>
+<div ng-if  = "vm.pleaseLogin" ng-hide = "vm.isLoggedIn()" class="alert alert-danger" role="alert">Sorry, this feature is only available for registered users. Please register or login now.</div>
