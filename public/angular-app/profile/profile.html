@@ -1,16 +1,37 @@
 <h1>Hello, {{ vm.loggedUser[0].username }}</h1>
+<div class = "container">
+    <div class = "col col-sm-7">
+        <div class = "row articleDiv">
+            <h3>Your recent searches:</h3>
+            <li ng-repeat="searches in vm.loggedUser[0].searches | orderBy: '-createdOn' | limitTo: 10"><a ng-href="#!/stocks/{{ searches.symbol }}">{{searches.symbol}}</a> -Searched on: {{searches.createdOn | date}}</li>
+        </div>
+        
+        <div class = "row articleDiv">
+            <h3>Your Saved Stocks:</h3>
+            <li ng-repeat = "saved in vm.loggedUser[0].savedStocks | orderBy: '-createdOn'"><a ng-href="#!/stocks/{{ saved.symbol }}">{{saved.symbol}}</a><button class = "saveArtBtn" ng-click = "vm.deleteStock(saved._id)">Remove Stock</button></li>
+        </div>
+        
+        <div class = "row articleDiv">
+            <h3>Your Reading List:</h3>
+            <li ng-repeat = "articles in vm.loggedUser[0].savedArticles | orderBy: '-createdOn'"><a ng-href = {{articles.url}}>{{articles.title}} - {{articles.articleSource}}</a><button class = "saveArtBtn" ng-click = "vm.deleteArticle(articles._id)">Remove Article</button></li>
+        </div>
+    </div>
 
-<div class = "articleDiv">
-    <h3>Your recent searches:</h3>
-    <li ng-repeat="searches in vm.loggedUser[0].searches | orderBy: '-createdOn' | limitTo: 10"><a ng-href="#!/stocks/{{ searches.symbol }}">{{searches.symbol}}</a> -Searched on: {{searches.createdOn | date}}</li>
-</div>
-
-<div class = "articleDiv">
-    <h3>Your Saved Stocks:</h3>
-    <li ng-repeat = "saved in vm.loggedUser[0].savedStocks | orderBy: '-createdOn'"><a ng-href="#!/stocks/{{ saved.symbol }}">{{saved.symbol}}</a><button class = "saveArtBtn" ng-click = "vm.deleteStock(saved._id)">Remove Stock</button></li>
-</div>
-
-<div class = "articleDiv">
-    <h3>Your Reading List:</h3>
-    <li ng-repeat = "articles in vm.loggedUser[0].savedArticles | orderBy: '-createdOn'"><a ng-href = {{articles.url}}>{{articles.title}} - {{articles.articleSource}}</a><button class = "saveArtBtn" ng-click = "vm.deleteArticle(articles._id)">Remove Article</button></li>
+    <div class = "col col-sm-5">
+        
+        <div class = "row portDiv">
+            <h3>Your balance</h3>
+            <p>{{vm.loggedUser[0].yourBalance | currency}}</p>
+        </div>
+        
+        <div class = "row portDiv">
+            <h3>Your Portfolio</h3>
+            <div ng-repeat = "ownedStocks in vm.loggedUser[0].ownedStocks | orderBy: '-createdOn'">
+                <a ng-href="#!/stocks/{{ ownedStocks.stockSymbol }}">{{ownedStocks.stockSymbol}}</a>
+                <p>Purchased on: {{ownedStocks.createdOn | date}}</p>
+                <p> {{ownedStocks.shares}} shares at {{ownedStocks.buyPrice | currency}} for {{ownedStocks.totalPrice | currency}}</p>
+                
+            </div>
+        </div>    
+    </div>
 </div>

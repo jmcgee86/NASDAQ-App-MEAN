@@ -49,6 +49,23 @@
             if(!response){
                 vm.error = "Cannot find stock";
             }else{
+                $(document).ready(function(){
+        $.ajax({
+          url:'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + symbol + '&interval=1min&apikey=' + stockPriceKey,
+          success: function(priceData){
+                console.log(priceData);
+            		      $timeout (function(){
+		          if (priceData) {
+			    vm.priceData = priceData;
+                vm.lastUpdated = priceData["Meta Data"]["3. Last Refreshed"];
+                var mostRecent = priceData["Time Series (1min)"][vm.lastUpdated]
+                vm.currentPrice = mostRecent["4. close"];
+		      }
+		      }) 
+
+          }
+        })
+    })    
             vm.stock = response.data;
             var postData = "";
             stockDataFactory.postQuery(symbol, postData).then(function(response){

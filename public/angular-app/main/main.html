@@ -17,8 +17,7 @@
           <h3>Information on {{ vm.stock.Name }}</h3>
     
           <p><small>{{ vm.stock.Symbol }}</small> </p>
-        
-          <p>Current Price: {{ vm.stock.LastSale | currency}}</p>
+          <p> Current Price: {{vm.currentPrice | currency }}</p>
           <p>Market Cap: {{ vm.stock.MarketCap | number: fractionSize }}</p>
           <p ng-hide = "!vm.stock.IPOyear">IPO Year: {{ vm.stock.IPOyear }}</p>
           <p ng-hide = "!vm.stock.Industry">Industry: {{ vm.stock.Industry }}</p>

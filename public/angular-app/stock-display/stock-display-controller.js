@@ -26,7 +26,6 @@ function StockController($route, $routeParams, $window, stockDataFactory, AuthFa
                 console.log(priceData);
             		      $timeout (function(){
 		          if (priceData) {
-		              console.log("if yes")
 			    vm.priceData = priceData;
                 vm.lastUpdated = priceData["Meta Data"]["3. Last Refreshed"];
                 var mostRecent = priceData["Time Series (1min)"][vm.lastUpdated]
@@ -117,7 +116,7 @@ $.ajax({
         var token = $window.sessionStorage.token;
         var decodedToken = jwtHelper.decodeToken(token);
         var User = decodedToken.username;
-                var totalPrice = parseInt(vm.shares) * vm.stock.LastSale //need to double check variables and function
+                var totalPrice = parseInt(vm.shares) * vm.currentPrice //need to double check variables and function
 
         stockDataFactory.getUser(User).then(function(response) {
         if(!response){
@@ -135,7 +134,7 @@ $.ajax({
         
         var buyInfo = {
             stockSymbol: $routeParams.Symbol,
-            stockPrice: vm.stock.LastSale, //need to double check exact vm.....
+            stockPrice: vm.currentPrice, //need to double check exact vm.....
             shares: vm.shares, //this comes from user form input on stock.html
             totalPrice: totalPrice
         }

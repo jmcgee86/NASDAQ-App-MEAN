@@ -2,8 +2,7 @@
 
 <p><small>{{ vm.stock.Symbol }}</small> </p>
 <p>Information Updated: {{vm.lastUpdated}}</p>
-<p>Current API Price: {{vm.currentPrice | currency}}</p>
-<p>Current Mongo Price: {{ vm.stock.LastSale | currency}}</p>
+<p>Current Price: {{vm.currentPrice | currency}}</p>
 <p>Market Cap: {{ vm.stock.MarketCap | number: fractionSize }}</p>
 <p ng-hide = "!vm.stock.IPOyear">IPO Year: {{ vm.stock.IPOyear }}</p>
 <p ng-hide = "!vm.stock.Industry">Industry: {{ vm.stock.Industry }}</p>
@@ -21,7 +20,7 @@
         <label for="shares">Amount</label>
         <input type="number" class="form-control" name="shares" id="shares" placeholder="Shares to buy" ng-model="vm.shares">
     </div>
-    <p  ng-hide = "buy.shares.$pristine" ng-if= "buy.shares.$dirty">Total Price for {{vm.shares}} shares: {{vm.shares * vm.stock.LastSale | currency}}</p>
+    <p  ng-hide = "buy.shares.$pristine" ng-if= "buy.shares.$dirty">Total Price for {{vm.shares}} shares: {{vm.shares * vm.currentPrice | currency}}</p>
 
   <button type="submit" class="btn btn-success">Buy</button>
 </form>
