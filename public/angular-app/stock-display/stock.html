@@ -1,8 +1,8 @@
 <h1>Information on {{ vm.stock.Name }}</h1>
 
 <p><small>{{ vm.stock.Symbol }}</small> </p>
-<p>Information Updated: {{vm.lastUpdated}}</p>
-<p>Current Price: {{vm.currentPrice | currency}}</p>
+<p ng-if="vm.lastUpdated">Information Updated: {{vm.lastUpdated}}</p>
+<p ng-if="vm.currentPrice">Current Price: {{vm.currentPrice | currency}}</p>
 <p>Market Cap: {{ vm.stock.MarketCap | number: fractionSize }}</p>
 <p ng-hide = "!vm.stock.IPOyear">IPO Year: {{ vm.stock.IPOyear }}</p>
 <p ng-hide = "!vm.stock.Industry">Industry: {{ vm.stock.Industry }}</p>

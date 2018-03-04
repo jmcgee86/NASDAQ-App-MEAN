@@ -61,7 +61,7 @@ router
     
 router
     .route('/users/:user/trade')
-    .post(ctrlUsers.buyStock);
-//     .put(ctrlUsers.sellStock)
+    .post(ctrlUsers.buyStock)
+    .put(ctrlUsers.sellStock);
 
 module.exports = router;

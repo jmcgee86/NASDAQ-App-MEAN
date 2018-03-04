@@ -14,7 +14,7 @@ function stockDataFactory($http){
         deleteSavedArticle: deleteSavedArticle,
         deleteSavedStock: deleteSavedStock,
         buyStock: buyStock,
-        // sellStock: sellStock
+        sellStock: sellStock
     };
     
     function stockList(){
@@ -66,9 +66,9 @@ function stockDataFactory($http){
         return $http.post('/api/users/' + User + '/trade/', buyInfo)
     }
     
-    // function sellStock(User, sellInfo){
-    //     return $http.put('/api/users' + User + '/trade/' + sellInfo)
-    // }
+    function sellStock(User, sellInfo){
+        return $http.put('/api/users/' + User + '/trade/', sellInfo)
+    }
     
     function complete(response){
         return response;

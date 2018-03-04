@@ -29,8 +29,11 @@ Features:
         - tweet summary and url to article with 'Tweet It' button
         - save article to user's 'reading list' on profile page
         - buttons to remove saved articles and and stocks from user profile 
+        - buy/sell stocks
         
 Future improvements/fixes:
 
     - add validation to prevent user from saving a stock or article if it is already saved
-    - create a mock buy/sell system
+    - add validation to to check if user already owns stock and if so, add to shares owned
+    - allow user to sell some of their shares instead of all shares of a particular stock
+    - refactor to better organize code

@@ -484,3 +484,53 @@ module.exports.buyStock = function (req,res){
     });
 };
 
+module.exports.sellStock = function (req, res){
+    var username = req.params.user;
+    var stockId = req.body.stockId
+    console.log("GET user", username);
+    var stockId = req.body.stockId;
+    console.log("GET stockId " + stockId);
+    
+
+    User   
+        .findOne({username:username})
+        .exec(function(err, foundUser){
+            var response = {
+                status: 200,
+                message: {}
+            };
+            if (err){
+                console.log("error finding user")
+                response.status = 500;
+                response.message = err;
+            }else if(!foundUser){
+                console.log("user not found in database", foundUser)
+                response.status = 404;
+                response.message = {
+                        message: 'user not found: ' + foundUser
+                    };
+            }else{
+            var stockId = req.body.stockId
+            var stock = foundUser.ownedStocks.id(stockId);
+            var sellPrice = parseFloat(req.body.sellPrice)
+            var income = parseFloat(sellPrice) * parseFloat(stock.shares)
+            stock.remove();
+            var balance = parseFloat(foundUser.yourBalance)
+            foundUser.yourBalance = balance + parseFloat(income);
+                 foundUser.save(function(err, userUpdated){
+                    if(err){
+                        res
+                            .status(500)
+                            .json(err);
+                    }else{
+                        console.log('tried to update', userUpdated);
+                        res
+                            .status(204)
+                            .json();
+                    }
+                });
+                };
+             
+        });
+   
+};

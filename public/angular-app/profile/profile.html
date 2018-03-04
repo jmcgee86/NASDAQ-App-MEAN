@@ -30,7 +30,7 @@
                 <a ng-href="#!/stocks/{{ ownedStocks.stockSymbol }}">{{ownedStocks.stockSymbol}}</a>
                 <p>Purchased on: {{ownedStocks.createdOn | date}}</p>
                 <p> {{ownedStocks.shares}} shares at {{ownedStocks.buyPrice | currency}} for {{ownedStocks.totalPrice | currency}}</p>
-                
+                <button class = "saveArtBtn" ng-click = "vm.sellStock(ownedStocks._id, ownedStocks.stockSymbol)">Sell {{ownedStocks.stockSymbol}}</button>
             </div>
         </div>    
     </div>
