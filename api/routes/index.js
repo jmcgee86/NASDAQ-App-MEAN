@@ -29,7 +29,13 @@ router
 
 router
     .route('/users/:user')
-    .get(ctrlUsers.retrieve);
+    .get(ctrlUsers.retrieve)
+    .put(ctrlUsers.addFunds);
+    
+// router
+//     .route('users/:user/funds')
+//     .put(ctrlUsers.addFunds);
+
     
 router
     .route('/stocks/:symbol/queries')

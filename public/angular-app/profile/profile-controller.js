@@ -103,4 +103,30 @@ function ProfileController($route,$routeParams, $window, stockDataFactory, AuthF
           }
         })
 }
+
+vm.addFunds = function(){
+    var token = $window.sessionStorage.token;
+    var decodedToken = jwtHelper.decodeToken(token);
+    var User = decodedToken.username;
+    var fundInfo = {
+     amount: vm.amount
+    }
+    stockDataFactory.addFunds(User, fundInfo).then(function(response){
+        }).catch(function(error){
+            console.log(error)
+        })
+    stockDataFactory.getUser(User).then(function(response) {
+        if(!response){
+            vm.error = "Cannot find user";
+        }else{
+            vm.loggedUser = response.data;
+            console.log(vm.loggedUser);
+            console.log(vm.loggedUser[0].username);
+            }
+            }).catch(function(error){
+                console.log(error);
+            });
+    
+}
+
 }

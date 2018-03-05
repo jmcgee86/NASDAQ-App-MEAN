@@ -534,3 +534,45 @@ module.exports.sellStock = function (req, res){
         });
    
 };
+
+module.exports.addFunds = function (req, res){
+    var username = req.params.user;
+    var amount = req.body.amount
+
+    User   
+        .findOne({username:username})
+        .exec(function(err, foundUser){
+            var response = {
+                status: 200,
+                message: {}
+            };
+            if (err){
+                console.log("error finding user")
+                response.status = 500;
+                response.message = err;
+            }else if(!foundUser){
+                console.log("user not found in database", foundUser)
+                response.status = 404;
+                response.message = {
+                        message: 'user not found: ' + foundUser
+                    };
+            }else{
+            var balance = parseFloat(foundUser.yourBalance)
+            foundUser.yourBalance = balance + parseFloat(amount);
+                 foundUser.save(function(err, userUpdated){
+                    if(err){
+                        res
+                            .status(500)
+                            .json(err);
+                    }else{
+                        console.log('tried to update', userUpdated);
+                        res
+                            .status(204)
+                            .json();
+                    }
+                });
+                };
+             
+        });
+   
+};

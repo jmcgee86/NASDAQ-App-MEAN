@@ -20,12 +20,20 @@
     <div class = "col col-sm-5">
         
         <div class = "row portDiv">
-            <h3>Your balance</h3>
+            <h3>Your balance:</h3>
             <p>{{vm.loggedUser[0].yourBalance | currency}}</p>
+            <form  name = "add" ng-submit = "vm.addFunds()">
+                <div class="form-group">
+                    <input type="number" class="form-control" name="shares" id="shares" placeholder="Add funds to your Account" ng-model="vm.amount" required>
+                </div>
+                <button type="submit" class="btn btn-success">Add Funds</button>
+            </form>
+
+
         </div>
         
         <div class = "row portDiv">
-            <h3>Your Portfolio</h3>
+            <h3>Your Portfolio:</h3>
             <div ng-repeat = "ownedStocks in vm.loggedUser[0].ownedStocks | orderBy: '-createdOn'">
                 <a ng-href="#!/stocks/{{ ownedStocks.stockSymbol }}">{{ownedStocks.stockSymbol}}</a>
                 <p>Purchased on: {{ownedStocks.createdOn | date}}</p>
